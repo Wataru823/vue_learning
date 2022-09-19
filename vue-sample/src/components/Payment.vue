@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 // const itemName1 = ref<string>('Desk')
 const itemName2 = 'Bike'
@@ -23,6 +23,17 @@ const clear = (event: any) => {
     item1.price = 0
 }
 
+const budget = 50000
+
+const priceLabel = computed(() => {
+    if (item1.price > budget * 2) {
+        return 'tooooo expensive..'
+    } else if (item1.price > budget) {
+        return 'expensive..'
+    } else {
+        return item1.price + ' yen'
+    }
+})
 
 </script>
 
@@ -35,13 +46,14 @@ const clear = (event: any) => {
 
         <div class="payment">
             <label>{{ item1.name }}</label>
-            <label>{{ item1.price }} 円</label>
+            <label>{{ priceLabel }}</label>
+            <!-- <label>{{ item1.price }} 円</label> -->
             <a :href="url1">bought at...</a>
             <button @click="buy(item1.name)">BUY</button>
         </div>
         <div class="payment">
             <label>{{ itemName2 }}</label>
-            <label>{{ price2 }} 円</label>
+            <label>{{ price2 }} yen</label>
             <button @click="buy(itemName2)">BUY</button>
         </div>
     </div>
