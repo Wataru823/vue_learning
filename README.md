@@ -1,4 +1,4 @@
-# vue_lerning
+# vue_learning
 
 ## 実行方法
 ```
