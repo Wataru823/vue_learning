@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-const tweets = ref([{ id: 0, description: 'Hello, world!' }, { id: 0, description: 'this is the second tweet' }])
+const tweets = ref([{ id: 0, description: 'Hello, world!' }, { id: 1, description: 'this is the second tweet' }])
 const inputtingDescription = ref<string>('')
 
 const postTweet = () => {
@@ -8,6 +8,10 @@ const postTweet = () => {
   tweets.value.push(tweet)
   inputtingDescription.value = ''
   console.log('post...', tweets.value)
+}
+
+const deleteTweet = (id: number) => {
+  tweets.value = tweets.value.filter(t => t.id !== id)
 }
 
 </script>
@@ -23,6 +27,7 @@ const postTweet = () => {
     <ul>
       <li v-for="tweet in tweets" :key="tweet.id" class="tweet-list">
         <span>{{ tweet.description }}</span>
+        <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
       </li>
     </ul>
   </div><!-- /.tweet-container -->
@@ -58,7 +63,7 @@ const postTweet = () => {
   width: 300px;
 }
 
-button {
+.save-button {
   color: #fff;
   font-weight: bold;
   background-color: #68c9c9;
@@ -66,5 +71,23 @@ button {
   border: none;
   width: 60px;
   height: 22px;
+}
+
+.save-button:hover {
+  background-color: #37bdbd;
+}
+
+.delete-button {
+  color: #fff;
+  font-weight: bold;
+  background-color: #c99a68;
+  border-radius: 2px;
+  border: none;
+  width: 60px;
+  height: 22px;
+}
+
+.delete-button:hover {
+  background-color: #c28543;
 }
 </style>
