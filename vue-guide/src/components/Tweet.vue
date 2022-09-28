@@ -17,21 +17,22 @@ const deleteTweet = (id: number) => {
 </script>
 
 <template>
-  <div class="container"></div>
-  <h1>Tweeter</h1>
-  <div class="form-container">
-    <input v-model="inputtingDescription" />
-    <button class="save-button" @click="postTweet()">post</button>
+  <div class="container">
+    <h1>Tweeter</h1>
+    <div class="form-container">
+      <input v-model="inputtingDescription" />
+      <button class="save-button" @click="postTweet()">post</button>
+    </div>
+    <div class="tweet-container">
+      <p v-if="tweets.length <= 0">No tweets have been added</p>
+      <ul v-else>
+        <li v-for="tweet in tweets" :key="tweet.id" class="tweet-list">
+          <span>{{ tweet.description }}</span>
+          <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
+        </li>
+      </ul>
+    </div><!-- /.tweet-container -->
   </div>
-  <div class="tweet-container">
-    <p v-if="tweets.length <= 0">No tweets have been added</p>
-    <ul v-else>
-      <li v-for="tweet in tweets" :key="tweet.id" class="tweet-list">
-        <span>{{ tweet.description }}</span>
-        <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
-      </li>
-    </ul>
-  </div><!-- /.tweet-container -->
 </template>
 
 <style scoped>
