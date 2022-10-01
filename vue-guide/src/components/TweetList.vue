@@ -9,11 +9,12 @@ type Props = {
     tweets: Tweet[]
 }
 
+defineProps<Props>()
+const emit = defineEmits(['delete-tweet'])
 const deleteTweet = (id: number) => {
-    console.log('delete')
+    emit('delete-tweet', id)
 }
 
-defineProps<Props>()
 </script>
 
 <template>
